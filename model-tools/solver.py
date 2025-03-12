@@ -1,10 +1,10 @@
-# Code for "ActionCLIP: ActionCLIP: A New Paradigm for Action Recognition"
-# arXiv:
-# Mengmeng Wang, Jiazheng Xing, Yong Liu
 
 import torch.optim as optim
 from utils.lr_scheduler import WarmupMultiStepLR, WarmupCosineAnnealingLR
-
+"""
+选择优化器
+optimizer = _optimizer(config, model, fusion_model)
+"""
 def _optimizer(config, model, fusion_model):
     if config.solver.optim == 'adam':
         optimizer = optim.Adam([{'params': model.parameters()},  
@@ -36,6 +36,14 @@ def _optimizer(config, model, fusion_model):
     else:
         raise ValueError('Unknown optimizer: {}'.format(config.solver.optim))
     return optimizer
+"""
+选择学习率策略 （选余弦）
+WarmupCosineAnnealingLR：这是一个带有热身阶段的余弦退火学习率调度器。在热身阶段，
+学习率会从一个较小的值逐步增加到初始学习率；之后，学习率会按照余弦函数的规律逐渐减小，直到训练结束
+config.solver.epochs：这是训练的总轮数。余弦退火策略会根据这个总轮数来调整学习率，使得学习率在整个训练过程中逐渐降低。
+warmup_epochs=config.solver.lr_warmup_step：这是热身阶段的轮数。在训练的前 config.solver.lr_warmup_step 轮中，
+学习率会从一个较小的值逐渐增加到初始学习率
+"""
 
 def _lr_scheduler(config,optimizer):
     if config.solver.type == 'cosine':
