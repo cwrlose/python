@@ -1,6 +1,3 @@
-# Code for "ActionCLIP: ActionCLIP: A New Paradigm for Action Recognition"
-# arXiv:
-# Mengmeng Wang, Jiazheng Xing, Yong Liu
 
 import numpy
 """
@@ -31,6 +28,9 @@ def convert_models_to_fp16(model):
 """
 create_logits 函数的主要目的是计算两个输入张量 x1 和 x2 之间的余弦相似度，并将其乘以一个缩放因子 logit_scale 得到 logits 值。在机器学习中，
 logits 通常是模型输出的未经过激活函数处理的原始分数，后续可能会用于计算损失或进行分类等操作。
+"""
+"""
+也是一个二维矩阵
 """
 def create_logits(x1, x2, logit_scale):
     x1 = x1 / x1.norm(dim=-1, keepdim=True)
