@@ -1,7 +1,9 @@
-# Code for "ActionCLIP: ActionCLIP: A New Paradigm for Action Recognition"
-# arXiv:
-# Mengmeng Wang, Jiazheng Xing, Yong Liu
+"""
+    image_embedding = model_image(images)
+    image_embedding = image_embedding.view(b,t,-1)#时间维度
+    image_embedding = fusion_model(image_embedding)
 
+"""
 import torch
 from torch import nn
 from collections import OrderedDict
