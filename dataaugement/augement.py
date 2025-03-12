@@ -1,5 +1,12 @@
 import dataaugement.transformer_ss
 from RandAugment import RandAugment
+"""
+用法
+transform_train = get_augmentation(True,config)
+transform_val = get_augmentation(False,config)
+if config.data.randaug.N > 0:
+        transform_train = randAugment(transform_train, config)
+"""
 
 class GroupTransform(object):
     def __init__(self, transform):
